@@ -1,0 +1,55 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1725416182301,
+      "tag": "0000_neat_fenris",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1725421736824,
+      "tag": "0001_windy_miracleman",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1725426121569,
+      "tag": "0002_faithful_komodo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1725426315993,
+      "tag": "0003_legal_adam_warlock",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1725426417766,
+      "tag": "0004_wet_grandmaster",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1725426539801,
+      "tag": "0005_windy_katie_power",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1725426620574,
+      "tag": "0006_deep_eternity",
+      "breakpoints": true
+    }
+  ]
+}

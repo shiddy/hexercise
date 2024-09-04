@@ -1,0 +1,80 @@
+{
+  "id": "822b9ef5-965e-47e1-b048-58406845d4ba",
+  "prevId": "5dac76bd-8b60-4f18-8048-382fc33709d6",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.muscle_groups_table": {
+      "name": "muscle_groups_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.muscles_table": {
+      "name": "muscles_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "sci_name": {
+          "name": "sci_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "muscle_group_id": {
+          "name": "muscle_group_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "muscles_table_muscle_group_id_muscle_groups_table_id_fk": {
+          "name": "muscles_table_muscle_group_id_muscle_groups_table_id_fk",
+          "tableFrom": "muscles_table",
+          "tableTo": "muscle_groups_table",
+          "columnsFrom": [
+            "muscle_group_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

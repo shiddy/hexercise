@@ -1,0 +1,41 @@
+Updating DB schema in 
+  @db/schema.ts
+  requires a run of `deno task db:setup` in order to generate the schema change migration file and a `deno task db:migrate` in order for the tables in supabase to be updated
+
+Todo:
+  * is there a way to clean up the state of the schema migrations? I think I only need the last one...
+  * Add more Exercises MuscleGroups
+  * Discern the mechanism to add sets which contain reps and weight for a User that will be tracked over multiple training days.
+
+    Training Day should have a day of the week. Which we map over several weeks to complete a mesocycle
+
+    Back focused Mesocycle -> 14 sets / week on targeted muscle group (Lats, Erectors)...
+    Arm focuses Mesocycle -> 14+ sets /week on targeted muscle group (triceps, biceps, delts)
+
+  Mesocycle Muscle Groups Focus,
+    
+    Training Day should have Muscle Groups to target, with specific exercises for 
+
+  on l:11 14sets / training days per mesocycle (14 / int(5))
+
+  Monday:
+    Skull Crushers 
+      s0 -> 25lbs [15reps] (2 rir)
+      s1 -> 25lbs [15reps] (2 rir)
+      s2 -> 25lbs [13reps] (2 rir)
+
+  Monday week2:
+      s0 -> 25lbs [16reps] (1 rir) [x]
+      s1 -> 25lbs [16reps] (1 rir) [ ]
+      s2 -> 25lbs [14reps] (1 rir) [ ]
+
+  * Mesocycle
+    * Days per Week training
+    * Targeted Muscle Groups
+
+  ... idk serialization data
+  TrainingDay # of sets / muscle group
+  what what completed vs what was skipped
+
+Todo: much later
+  * have a lbs to kgs option and an understanding how to change that in the DB... or if it needs to be changed

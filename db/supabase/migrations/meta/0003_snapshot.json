@@ -1,0 +1,226 @@
+{
+  "id": "fe216751-004e-4f24-94aa-eac5b8354da1",
+  "prevId": "e47c93a3-f4b9-47c9-ab4b-35ac31fbc736",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.excercise_to_muscle_group_map": {
+      "name": "excercise_to_muscle_group_map",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "excercise_id": {
+          "name": "excercise_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "muscle_group_id": {
+          "name": "muscle_group_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "excercise_to_muscle_group_map_excercise_id_excercise_table_id_fk": {
+          "name": "excercise_to_muscle_group_map_excercise_id_excercise_table_id_fk",
+          "tableFrom": "excercise_to_muscle_group_map",
+          "tableTo": "excercise_table",
+          "columnsFrom": [
+            "excercise_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "excercise_to_muscle_group_map_muscle_group_id_muscle_groups_table_id_fk": {
+          "name": "excercise_to_muscle_group_map_muscle_group_id_muscle_groups_table_id_fk",
+          "tableFrom": "excercise_to_muscle_group_map",
+          "tableTo": "muscle_groups_table",
+          "columnsFrom": [
+            "muscle_group_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.equipment_table": {
+      "name": "equipment_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.excercise_table": {
+      "name": "excercise_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "muscle_group_map_id": {
+          "name": "muscle_group_map_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "muscle_group_id": {
+          "name": "muscle_group_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "excercise_table_muscle_group_map_id_excercise_to_muscle_group_map_id_fk": {
+          "name": "excercise_table_muscle_group_map_id_excercise_to_muscle_group_map_id_fk",
+          "tableFrom": "excercise_table",
+          "tableTo": "excercise_to_muscle_group_map",
+          "columnsFrom": [
+            "muscle_group_map_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "excercise_table_muscle_group_id_equipment_table_id_fk": {
+          "name": "excercise_table_muscle_group_id_equipment_table_id_fk",
+          "tableFrom": "excercise_table",
+          "tableTo": "equipment_table",
+          "columnsFrom": [
+            "muscle_group_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.muscle_groups_table": {
+      "name": "muscle_groups_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.muscles_table": {
+      "name": "muscles_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "sci_name": {
+          "name": "sci_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "muscle_group_id": {
+          "name": "muscle_group_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "muscles_table_muscle_group_id_muscle_groups_table_id_fk": {
+          "name": "muscles_table_muscle_group_id_muscle_groups_table_id_fk",
+          "tableFrom": "muscles_table",
+          "tableTo": "muscle_groups_table",
+          "columnsFrom": [
+            "muscle_group_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "muscles_table_sci_name_unique": {
+          "name": "muscles_table_sci_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "sci_name"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "excercise_table" ALTER COLUMN "muscle_group_map_id" DROP NOT NULL;
