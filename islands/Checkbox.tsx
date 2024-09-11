@@ -39,6 +39,11 @@ export default function Checkbox(params) {
       document.getElementById(`w-${set_index}`).value = weight;
       weights[set_index] = weight;
     }
+    if (!reps[set_index]) {
+      const rep = parseInt(document.getElementById(`r-${set_index}`).placeholder);
+      document.getElementById(`r-${set_index}`).value = rep;
+      reps[set_index] = rep;
+    }
 
     try {
       const response = await fetch("/api/update-workout", {
