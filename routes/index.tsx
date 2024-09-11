@@ -4,7 +4,7 @@ import Exercise from "../islands/Excercise.tsx";
 import { getMuscleGroupByName, getExcerciseByName, getWorkoutById } from "@/db/queries/select.ts"
 import { updateWorkout } from "@/db/queries/update.ts"
 import { FreshContext } from "$fresh/server.ts";
-import Checkbox from "../islands/Checkbox.tsx"
+//import Checkbox from "../islands/Checkbox.tsx"
 
 // async function uW() {
 //   console.log("calling updateworkout");
@@ -31,9 +31,9 @@ export default function Home(params: any) {
   return (
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
         {ex.map((e, i) => <Exercise ex={e} i={i} />)}
-        <Checkbox />
       </div>
   );
+        //<Checkbox />
   // <Counter count={count} />
   // <MuscleGroup mg={mg} />
 }

@@ -3,9 +3,18 @@ Updating DB schema in
   requires a run of `deno task db:setup` in order to generate the schema change migration file and a `deno task db:migrate` in order for the tables in supabase to be updated
 
 Todo:
-  * is there a way to clean up the state of the schema migrations? I think I only need the last one...
-  * Add more Exercises MuscleGroups
-  * Discern the mechanism to add sets which contain reps and weight for a User that will be tracked over multiple training days.
+  * [ ] is there a way to clean up the state of the schema migrations? I think I only need the last one...
+    * Yeah but not for dev. just keep it ugly until we have a 1.0
+  * [X] Add more Exercises MuscleGroups
+
+  * [ ] Autofill the excercises through the DB to the front-end
+  * [ ] Auth
+  * [ ] Pretty version migrated form shadcn-test
+
+
+
+
+Scratch:
 
     Training Day should have a day of the week. Which we map over several weeks to complete a mesocycle
 

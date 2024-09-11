@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*@layer base {*/
+/*  :root {*/
+/*    --card: 0 0% 100%;*/
+/*    --card-foreground: 222.2 47.4% 11.2%;*/
+/*  }*/
+/*}*/
+
+.card {
+  @apply bg-gradient-to-b from-slate-50 to-gray-200;
+  @apply rounded-lg shadow-sm my-2;
+  @apply min-w-full;
+}
+
+.cardHeader {
+  @apply flex flex-col space-y-1.5 p-6;
+}
+
+.cardTitle {
+
+}
+
+.cardTitleH {
+  @apply text-2xl font-semibold leading-none tracking-tight;
+}
+
+.cardDescription {
+  @apply pt-0;
+}
+
+.cardDescriptionP {
+  @apply text-sm text-gray-400;
+}
+
+.cardFlag {
+  
+}
+
+.cardContent {
+  @apply p-4 pt-0 flex flex-col;
+}
+
+.exCheckbox {
+  @apply h-8 w-12 cursor-pointer transition-all appearance-none rounded-lg bg-emerald-100 shadow hover:shadow-md border border-emerald-200 checked:bg-emerald-500 checked:border-emerald-500;
+}
