@@ -4,20 +4,28 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $api_update_workout from "./routes/api/update-workout.ts";
 import * as $index from "./routes/index.tsx";
 import * as $musclegroups_id_ from "./routes/musclegroups/[id].tsx";
+import * as $t from "./routes/t.tsx";
+import * as $Checkbox from "./islands/Checkbox.tsx";
 import * as $Excercise from "./islands/Excercise.tsx";
+import * as $SignIn from "./islands/SignIn.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/api/update-workout.ts": $api_update_workout,
     "./routes/index.tsx": $index,
     "./routes/musclegroups/[id].tsx": $musclegroups_id_,
+    "./routes/t.tsx": $t,
   },
   islands: {
+    "./islands/Checkbox.tsx": $Checkbox,
     "./islands/Excercise.tsx": $Excercise,
+    "./islands/SignIn.tsx": $SignIn,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

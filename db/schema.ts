@@ -1,4 +1,5 @@
-import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
 
 // export const usersTable = pgTable('users_table', {
 //   id: serial('id').primaryKey(),
@@ -6,7 +7,6 @@ import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 //   age: integer('age').notNull(),
 //   email: text('email').notNull().unique(),
 // });
-
 // export const postsTable = pgTable('posts_table', {
 //   id: serial('id').primaryKey(),
 //   title: text('title').notNull(),
@@ -69,9 +69,39 @@ export const ExcerciseToMuscleGroupMap = pgTable('excercise_to_muscle_group_map'
     .references(() => muscleGroupsTable.id, {}),
 });
 
+export const workout = pgTable('workout_table', {
+  id: serial('id').primaryKey(),
+  excercise_id: integer('excercise_id')
+    // .notNull() // This is because we can use User Excercises later
+    .references(() => excerciseTable.id, {}),
+  muscle_group_id: integer('muscle_group_id')
+    .notNull()
+    .references(() => muscleGroupsTable.id, {}),
+  sets: integer('sets')
+    .notNull(),
+  recommended_weight: integer('recommended_weight')
+    .array()
+    .notNull()
+    .default(sql`'{}'::integer[]`),
+  finished_weight: integer('finished_weight')
+    .array()
+    .notNull()
+    .default(sql`'{}'::integer[]`),
+  recommended_reps: integer('recommended_reps')
+    .array()
+    .notNull()
+    .default(sql`'{}'::integer[]`),
+  finished_reps: integer('finished_reps')
+    .array()
+    .notNull()
+    .default(sql`'{}'::integer[]`),
+  completed: boolean('completed')
+    .notNull(),
+});
 
 export type SelectMuscles = typeof musclesTable.$inferSelect;
 export type SelectMuscleGroups = typeof muscleGroupsTable.$inferSelect;
 export type SelectEquipment = typeof equipmentTable.$inferSelect;
 export type SelectExcercise = typeof excerciseTable.$inferSelect;
 export type SelectExcerciseToMuscleGroupMap = typeof ExcerciseToMuscleGroupMap.$inferSelect;
+export type SelectWorkout = typeof workout.$inferSelect;

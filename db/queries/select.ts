@@ -1,6 +1,6 @@
 import { asc, between, count, eq, getTableColumns, sql } from 'drizzle-orm';
 import { db } from '../index.ts';
-import { SelectMuscleGroups, muscleGroupsTable, musclesTable, SelectExcercise, excerciseTable, ExcerciseToMuscleGroupMap, equipmentTable } from '../../db/schema.ts';
+import { SelectMuscleGroups, muscleGroupsTable, musclesTable, SelectExcercise, excerciseTable, ExcerciseToMuscleGroupMap, equipmentTable, SelectWorkout, workout } from '../../db/schema.ts';
 
 export async function getMuscleGroupByName(name: SelectMuscleGroups['name']): Promise<
   Array<{
@@ -34,5 +34,10 @@ export async function getExcerciseByName(name: SelectExcercise['name']): Promise
     mgs.push(mg[0]);
   }
   Object.assign(ex[0], {equiptment: eqip[0].name, muscleGroups: mgs});
+  return ex[0];
+}
+
+export async function getWorkoutById(id: SelectWorkout['id']) {
+  let ex = await db.select().from(workout).where(eq(workout.id, id));
   return ex[0];
 }

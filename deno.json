@@ -13,17 +13,8 @@
     "db:setup": "deno task db:setup:deps && deno task db:setup:generate && deno task db:migrate",
     "db:migrate": "deno run -A --node-modules-dir npm:drizzle-kit migrate"
   },
-  "lint": {
-    "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
-    }
-  },
-  "exclude": [
-    "**/_fresh/*"
-  ],
+  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
+  "exclude": ["**/_fresh/*"],
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
     "preact": "https://esm.sh/preact@10.19.6",
@@ -41,9 +32,6 @@
     "postgres": "npm:postgres",
     "@/": "./"
   },
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
-  },
+  "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
   "nodeModulesDir": true
 }

@@ -1,16 +1,15 @@
-// import { config } from 'dotenv';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import "jsr:@std/dotenv/load";
 
-// config({ path: '.env' }); // or .env.local
 
 const client = postgres(
   {
-    host: "127.0.0.1",
-    port: "5432",
-    user: "postgres",
-    password: "your-super-secret-and-long-postgres-password",
-    database: "postgres"
+    host: Deno.env.get("PG_HOST"),
+    port: Deno.env.get("PG_PORT"),
+    user: Deno.env.get("PG_USER"),
+    password: Deno.env.get("PG_PASS"),
+    database: Deno.env.get("PG_DB"),
   }
 )
 export const db = drizzle(client);

@@ -1,0 +1,2 @@
+ALTER TABLE "workout_table" ADD COLUMN "recommended_weight" integer[] DEFAULT '{}'::integer[] NOT NULL;--> statement-breakpoint
+ALTER TABLE "workout_table" ADD COLUMN "finished_weight" integer[] DEFAULT '{}'::integer[] NOT NULL;
