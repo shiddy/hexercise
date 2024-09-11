@@ -62,7 +62,8 @@ export default function Excercise(props: any) {
   // }
   const lbs = [5, 10, 12.5, 15, 20, 25, 30, 35, 40, 50, 60];
 
-  const sets = Math.floor(Math.random() * 5) + 1;
+  //const sets = Math.floor(Math.random() * 5) + 1;
+  const sets = 4;
   //console.log(sets);
   const weights = [];
   const reps = [];

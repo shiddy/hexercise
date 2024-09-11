@@ -3,9 +3,11 @@ CREATE TABLE IF NOT EXISTS "workout_table" (
 	"excercise_id" integer,
 	"muscle_group_id" integer NOT NULL,
 	"sets" integer NOT NULL,
+	"recommended_weight" integer[] DEFAULT '{}'::integer[] NOT NULL,
+	"finished_weight" integer[] DEFAULT '{}'::integer[] NOT NULL,
 	"recommended_reps" integer[] DEFAULT '{}'::integer[] NOT NULL,
 	"finished_reps" integer[] DEFAULT '{}'::integer[] NOT NULL,
-	"completed" boolean NOT NULL
+	"completed" integer[] DEFAULT '{}'::integer[] NOT NULL
 );
 --> statement-breakpoint
 DO $$ BEGIN

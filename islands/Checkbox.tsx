@@ -6,9 +6,10 @@ export default function Checkbox(params) {
   const [checked, setChecked] = useState(false);
 
   const handleChange = async (event: Event) => {
+    //console.log(parseInt(event.target.id.split('-')[1]));
     const isChecked = (event.target as HTMLInputElement).checked;
 
-    console.log("Checkbox clicked, new value:", isChecked);
+    //console.log("Checkbox clicked, new value:", isChecked);
 
     setChecked(isChecked);
 
@@ -16,25 +17,28 @@ export default function Checkbox(params) {
     }
     // console.log(params);
 
-    const r = [];
-    console.log("o-sets" + params.sets)
+    const weights = [];
+    const reps = [];
+    const completed = [];
     for (let i in params.sets) {
-      console.log(document.getElementById(`r-${i}`).value)
-      r.push(
+      weights.push(
+        parseInt(document.getElementById(`w-${i}`).value)
+      )
+      reps.push(
         parseInt(document.getElementById(`r-${i}`).value)
       )
+      completed.push(
+        parseInt(+(document.getElementById(`c-${i}`).checked))
+      )
     }
-
-    console.log(r);
-
-    const a = Array(params.sets);
-    const d = {};
-    // const formData = new FormData();
-    // formData.append("weight", (document.getElementById("w-0") as HTMLInputElement).value);
-    // formData.append("reps", (document.getElementById("r-0") as HTMLInputElement).value);
-    // d["reps"] = a;
-    // d.reps[params.id] = document.getElementById(`r-${params.id}`).value
-    // console.log(formData.reps);
+    
+    
+    const set_index = parseInt(event.target.id.split('-')[1]);
+    if (!weights[set_index]) {
+      const weight = parseInt(document.getElementById(`w-${set_index}`).placeholder);
+      document.getElementById(`w-${set_index}`).value = weight;
+      weights[set_index] = weight;
+    }
 
     try {
       const response = await fetch("/api/update-workout", {
@@ -43,10 +47,10 @@ export default function Checkbox(params) {
         body: JSON.stringify({
           id: 1,
           data: {
-            finished_reps: r,
-            completed: isChecked
+            finished_weight: weights,
+            finished_reps: reps,
+            completed: completed
           }
-          // data: {finished_reps: [formData.reps], completed: isChecked}
         }),
       });
 
@@ -65,11 +69,11 @@ export default function Checkbox(params) {
     <div>
       <input
         type="checkbox"
-        id={"myCheckbox-" + params.id}
+        id={"c-" + params.id}
         checked={checked}
         onChange={handleChange}
       />
-      <label htmlFor={"myCheckbox-" + params.id}>Checkbox</label>
+      <label id={"c-" + params.id}></label>
     </div>
   );
 }

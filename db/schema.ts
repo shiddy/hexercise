@@ -95,8 +95,10 @@ export const workout = pgTable('workout_table', {
     .array()
     .notNull()
     .default(sql`'{}'::integer[]`),
-  completed: boolean('completed')
-    .notNull(),
+  completed: integer('completed')
+    .array()
+    .notNull()
+    .default(sql`'{}'::integer[]`),
 });
 
 export type SelectMuscles = typeof musclesTable.$inferSelect;

@@ -54,15 +54,8 @@
     {
       "idx": 7,
       "version": "7",
-      "when": 1725854272998,
-      "tag": "0007_many_timeslip",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1725860481851,
-      "tag": "0008_furry_wendell_rand",
+      "when": 1726024286587,
+      "tag": "0007_huge_madame_web",
       "breakpoints": true
     }
   ]

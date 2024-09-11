@@ -1,5 +1,5 @@
 {
-  "id": "78188fe8-8bea-44d2-af69-e7be32087729",
+  "id": "c56cd641-6598-4467-9505-5d30fc4b494f",
   "prevId": "03816daf-8a29-4c53-ab4d-745dcc26d96b",
   "version": "7",
   "dialect": "postgresql",
@@ -45,87 +45,6 @@
         "excercise_to_muscle_group_map_muscle_group_id_muscle_groups_table_id_fk": {
           "name": "excercise_to_muscle_group_map_muscle_group_id_muscle_groups_table_id_fk",
           "tableFrom": "excercise_to_muscle_group_map",
-          "tableTo": "muscle_groups_table",
-          "columnsFrom": [
-            "muscle_group_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "public.workout_table": {
-      "name": "workout_table",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "excercise_id": {
-          "name": "excercise_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "muscle_group_id": {
-          "name": "muscle_group_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "sets": {
-          "name": "sets",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "recommended_reps": {
-          "name": "recommended_reps",
-          "type": "integer[]",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'{}'::integer[]"
-        },
-        "finished_reps": {
-          "name": "finished_reps",
-          "type": "integer[]",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'{}'::integer[]"
-        },
-        "completed": {
-          "name": "completed",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "workout_table_excercise_id_excercise_table_id_fk": {
-          "name": "workout_table_excercise_id_excercise_table_id_fk",
-          "tableFrom": "workout_table",
-          "tableTo": "excercise_table",
-          "columnsFrom": [
-            "excercise_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "workout_table_muscle_group_id_muscle_groups_table_id_fk": {
-          "name": "workout_table_muscle_group_id_muscle_groups_table_id_fk",
-          "tableFrom": "workout_table",
           "tableTo": "muscle_groups_table",
           "columnsFrom": [
             "muscle_group_id"
@@ -275,6 +194,102 @@
           ]
         }
       }
+    },
+    "public.workout_table": {
+      "name": "workout_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "excercise_id": {
+          "name": "excercise_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "muscle_group_id": {
+          "name": "muscle_group_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sets": {
+          "name": "sets",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "recommended_weight": {
+          "name": "recommended_weight",
+          "type": "integer[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::integer[]"
+        },
+        "finished_weight": {
+          "name": "finished_weight",
+          "type": "integer[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::integer[]"
+        },
+        "recommended_reps": {
+          "name": "recommended_reps",
+          "type": "integer[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::integer[]"
+        },
+        "finished_reps": {
+          "name": "finished_reps",
+          "type": "integer[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::integer[]"
+        },
+        "completed": {
+          "name": "completed",
+          "type": "integer[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::integer[]"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "workout_table_excercise_id_excercise_table_id_fk": {
+          "name": "workout_table_excercise_id_excercise_table_id_fk",
+          "tableFrom": "workout_table",
+          "tableTo": "excercise_table",
+          "columnsFrom": [
+            "excercise_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "workout_table_muscle_group_id_muscle_groups_table_id_fk": {
+          "name": "workout_table_muscle_group_id_muscle_groups_table_id_fk",
+          "tableFrom": "workout_table",
+          "tableTo": "muscle_groups_table",
+          "columnsFrom": [
+            "muscle_group_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     }
   },
   "enums": {},
