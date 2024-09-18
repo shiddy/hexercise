@@ -1,5 +1,5 @@
 import { useSignal } from "@preact/signals";
-import Exercise from "../islands/Excercise.tsx";
+import Exercise from "@/islands/Excercise.tsx";
 import { getMuscleGroupByName, getExcerciseByName, getWorkoutById, getWorkoutByMesocycleDay } from "@/db/queries/select.ts"
 import { updateWorkout } from "@/db/queries/update.ts"
 import { FreshContext } from "$fresh/server.ts";
@@ -30,16 +30,12 @@ function LoggedOut() {
 export const handler = async (_req: Request, ctx: FreshContext) => {
   const cookies = getCookies(_req.headers);
   const out = [];
-  //console.log(await getWorkoutByMesocycleDay(1, 1))
-  //out.push(await getExcerciseByName('Skull Crushers'));
-  //out.push(await getExcerciseByName('Lat Pulldown'));
-  return ctx.render({ex: await getWorkoutByMesocycleDay(1, 1), isAllowed: cookies.auth === "bar"});
+  return ctx.render({ex: await getWorkoutByMesocycleDay(ctx.params.meso, ctx.params.day), isAllowed: cookies.auth === "bar"});
 };
 
 export default function Home(params: any) {
   const ex = (params.data.ex);
   // const count = useSignal(3);
-  console.log(params.data);
 
   return (
     <>
@@ -49,7 +45,4 @@ export default function Home(params: any) {
       </div>
     </>
   );
-  //<Checkbox />
-  // <Counter count={count} />
-  // <MuscleGroup mg={mg} />
 }

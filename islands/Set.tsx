@@ -8,35 +8,61 @@ export default function ExSet(params) {
     const isChecked = (event.target as HTMLInputElement).checked;
 
     setChecked(isChecked);
+    const parts = event.target.id.split('-');
+    let workout_id = parseInt(parts[1]);
+    let index = parseInt(parts[2]);
 
-    if (isChecked) {
-    }
-
+    // Here we get all the current values of the sets where the checkbox
+    // was clicked
     const weights = [];
     const reps = [];
     const completed = [];
     for (let i of Array(params.tsets).keys()) {
       weights.push(
-        parseInt(document.getElementById(`w-${i}`).value)
+        parseInt(document.getElementById(`w-${workout_id}-${i}`).value)
       )
-      reps.push(
-        parseInt(document.getElementById(`r-${i}`).value)
-      )
+      const rep = document.getElementById(`r-${workout_id}-${i}`).value
+      if (!(rep.includes('rir'))) {
+        reps.push(
+          parseInt(rep)
+        );
+      }
       completed.push(
-        parseInt(+(document.getElementById(`c-${i}`).checked))
+        parseInt(+(document.getElementById(`c-${workout_id}-${i}`).checked))
       )
     }
-    
-    const set_index = parseInt(event.target.id.split('-')[1]);
-    if (!weights[set_index]) {
-      const weight = parseInt(document.getElementById(`w-${set_index}`).placeholder);
-      document.getElementById(`w-${set_index}`).value = weight;
-      weights[set_index] = weight;
+
+    // Here is where we check whether you have finished your preceeding sets
+    for (let i of Array(index).keys()) {
+      if (!(document.getElementById(`c-${workout_id}-${i}`).checked)) {
+        document.getElementById(`c-${workout_id}-${index}`).checked = false;
+        setChecked(false);
+        return null;
+      }
     }
-    if (!reps[set_index]) {
-      const rep = parseInt(document.getElementById(`r-${set_index}`).placeholder);
-      document.getElementById(`r-${set_index}`).value = rep;
-      reps[set_index] = rep;
+
+    // Here is where we check whether the current row has an actual value or is still a rir reccomendataion
+    console.log(index)
+    if (document.getElementById(`r-${workout_id}-${index}`).placeholder.includes('rir')) {
+        document.getElementById(`c-${workout_id}-${index}`).checked = false;
+      setChecked(false);
+      return null;
+    }
+
+    // Here is where we handle the user checking the box without entering
+    // values into the input. We default to grabbing the placeholder and
+    // setting the actual value of the input
+    if (isChecked) {
+      if (!weights[index]) {
+        const weight = parseInt(document.getElementById(`w-${workout_id}-${index}`).placeholder);
+        document.getElementById(`w-${workout_id}-${index}`).value = weight;
+        weights[index] = weight;
+      }
+      if (!reps[index]) {
+        const rep = parseInt(document.getElementById(`r-${workout_id}-${index}`).placeholder);
+        document.getElementById(`r-${workout_id}-${index}`).value = rep;
+        reps[index] = rep;
+      }
     }
 
     try {
@@ -44,7 +70,7 @@ export default function ExSet(params) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: 1,
+          id: workout_id,
           data: {
             finished_weight: weights,
             finished_reps: reps,

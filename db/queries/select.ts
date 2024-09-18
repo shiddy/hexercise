@@ -1,6 +1,12 @@
-import { asc, between, count, eq, getTableColumns, sql } from 'drizzle-orm';
+import { asc, between, count, eq, and, getTableColumns, sql } from 'drizzle-orm';
 import { db } from '../index.ts';
-import { SelectMuscleGroups, muscleGroupsTable, musclesTable, SelectExcercise, excerciseTable, ExcerciseToMuscleGroupMap, equipmentTable, SelectWorkout, workout } from '../../db/schema.ts';
+import { 
+  SelectMuscleGroups, muscleGroupsTable,
+  musclesTable, SelectExcercise,
+  excerciseTable, ExcerciseToMuscleGroupMap,
+  equipmentTable, SelectWorkout, workoutTable,
+  mesocycleTable, SelectMesocycle
+} from '../../db/schema.ts';
 
 export async function getMuscleGroupByName(name: SelectMuscleGroups['name']): Promise<
   Array<{
@@ -37,7 +43,12 @@ export async function getExcerciseByName(name: SelectExcercise['name']): Promise
   return ex[0];
 }
 
-export async function getWorkoutById(id: SelectWorkout['id']) {
-  let ex = await db.select().from(workout).where(eq(workout.id, id));
-  return ex[0];
+export async function getWorkoutByMesocycleDay(meso_id: SelectMesocycle['id'], day) {
+  let meso = await db.select().from(mesocycleTable).where(eq(mesocycleTable.id, meso_id))
+    .leftJoin(workoutTable, and(eq(workoutTable.mesocycle_id, meso_id), eq(workoutTable.mesocycle_day, day)))
+    .leftJoin(excerciseTable, eq(workoutTable.excercise_id, excerciseTable.id))
+    .leftJoin(equipmentTable, eq(equipmentTable.id, excerciseTable.equipment_id))
+    .leftJoin(muscleGroupsTable, eq(muscleGroupsTable.id, workoutTable.muscle_group_id))
+    .orderBy(asc(workoutTable.id));
+  return meso;
 }

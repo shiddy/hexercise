@@ -49,6 +49,11 @@ export const equipmentTable = pgTable('equipment_table', {
   name: text('name').notNull(),
 });
 
+export const variationTable = pgTable('variation_table', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+});
+
 export const excerciseTable = pgTable('excercise_table', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
@@ -69,11 +74,27 @@ export const ExcerciseToMuscleGroupMap = pgTable('excercise_to_muscle_group_map'
     .references(() => muscleGroupsTable.id, {}),
 });
 
-export const workout = pgTable('workout_table', {
+export const ExcerciseToVariationMap = pgTable('excercise_to_variation_map', {
   id: serial('id').primaryKey(),
+  excercise_id: integer('excercise_id')
+    .notNull()
+    .references(() => excerciseTable.id, {}),
+  variation_id: integer('variation_id')
+    .notNull()
+    .references(() => variationTable.id, {}),
+});
+
+export const workoutTable = pgTable('workout_table', {
+  id: serial('id').primaryKey(),
+  mesocycle_id: integer('mesocycle_id')
+    .references(() => mesocycleTable.id, {}),
+  mesocycle_day: integer('mesocycle_day'),
+  mesocycle_week: integer('mesocycle_week'),
   excercise_id: integer('excercise_id')
     // .notNull() // This is because we can use User Excercises later
     .references(() => excerciseTable.id, {}),
+  variation_id: integer('variation_id')
+    .references(() => variationTable.id, {}),
   muscle_group_id: integer('muscle_group_id')
     .notNull()
     .references(() => muscleGroupsTable.id, {}),
@@ -101,9 +122,18 @@ export const workout = pgTable('workout_table', {
     .default(sql`'{}'::integer[]`),
 });
 
+export const mesocycleTable = pgTable('mesocycle_table', {
+  id: serial('id').primaryKey(),
+  days_total: integer('days_total')
+    .notNull(),
+  weeks_total: integer('weeks_total')
+    .notNull(),
+});
+
 export type SelectMuscles = typeof musclesTable.$inferSelect;
 export type SelectMuscleGroups = typeof muscleGroupsTable.$inferSelect;
 export type SelectEquipment = typeof equipmentTable.$inferSelect;
 export type SelectExcercise = typeof excerciseTable.$inferSelect;
 export type SelectExcerciseToMuscleGroupMap = typeof ExcerciseToMuscleGroupMap.$inferSelect;
-export type SelectWorkout = typeof workout.$inferSelect;
+export type SelectWorkout = typeof workoutTable.$inferSelect;
+export type SelectMesocycle = typeof mesocycleTable.$inferSelect;

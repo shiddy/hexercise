@@ -2,8 +2,11 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $_meso_day_ from "./routes/[meso]/[day].tsx";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $api_login from "./routes/api/login.ts";
+import * as $api_logout from "./routes/api/logout.ts";
 import * as $api_update_workout from "./routes/api/update-workout.ts";
 import * as $index from "./routes/index.tsx";
 import * as $musclegroups_id_ from "./routes/musclegroups/[id].tsx";
@@ -16,8 +19,11 @@ import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
+    "./routes/[meso]/[day].tsx": $_meso_day_,
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/api/login.ts": $api_login,
+    "./routes/api/logout.ts": $api_logout,
     "./routes/api/update-workout.ts": $api_update_workout,
     "./routes/index.tsx": $index,
     "./routes/musclegroups/[id].tsx": $musclegroups_id_,
